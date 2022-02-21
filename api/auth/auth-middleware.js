@@ -9,7 +9,11 @@ const { findBy } = require('../users/users-model');
   }
 */
 function restricted(req, res, next) {
-  next();
+  if(!req.session.user) {
+    next({ status: 401, message: 'You shall not pass!' });
+  } else {
+    next();
+  }
 }
 
 /*
